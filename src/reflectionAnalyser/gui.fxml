@@ -20,31 +20,47 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="1">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+      <HBox focusTraversable="false" prefHeight="400.0" prefWidth="600.0" style="-fx-focus-color: transparent;" GridPane.rowIndex="1">
+        <children>
+          <VBox prefHeight="160.0">
                <children>
-                  <TextField fx:id="searchField" layoutX="14.0" layoutY="25.0" onKeyTyped="#searchClass" prefHeight="35.0" prefWidth="145.0" />
-                  <Separator layoutY="66.0" prefHeight="5.0" prefWidth="173.0" />
-                  <Label layoutX="14.0" layoutY="1.0" prefHeight="27.0" prefWidth="154.0" text="Search classes..." />
-                  <ScrollPane hbarPolicy="NEVER" layoutX="8.0" layoutY="71.0" prefHeight="328.0" prefWidth="160.0">
+                  <Label layoutX="14.0" layoutY="1.0" prefHeight="27.0" prefWidth="154.0" text="Search classes...">
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin></Label>
+                  <TextField fx:id="searchField" layoutX="14.0" layoutY="25.0" prefHeight="35.0" prefWidth="145.0">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin></TextField>
+                   <Button fx:id="searchButton" layoutX="14.0" layoutY="65.0" onAction="#searchClass" prefHeight="25.0" prefWidth="185.0" text="Search">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin></Button>
+                  <Separator layoutY="90" prefHeight="5.0" prefWidth="173.0" />
+                  <ScrollPane layoutX="7.0" layoutY="95.0" prefHeight="300.0" prefWidth="196.0">
                      <content>
-                        <VBox fx:id="searchResContainer" prefHeight="322.0" prefWidth="157.0" />
+                        <VBox fx:id="searchResContainer" />
                      </content>
                   </ScrollPane>
                </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="310.0">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </VBox>
+          <VBox minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="399.0">
                <children>
                   <ScrollPane layoutX="2.0" layoutY="-1.0" prefHeight="398.0" prefWidth="415.0" vbarPolicy="NEVER">
                      <content>
-                        <TreeView fx:id="tree" prefHeight="400.0" prefWidth="408.0" />
+                        <TreeView fx:id="tree" prefHeight="400.0" prefWidth="398.0" />
                      </content>
                   </ScrollPane>
                </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+            </VBox>
+        </children>
+      </HBox>
       <Label text="Reflection Tree" textAlignment="CENTER" translateX="40.0">
          <font>
             <Font name="Tw Cen MT" size="48.0" />
