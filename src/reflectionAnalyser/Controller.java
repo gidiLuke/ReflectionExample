@@ -1,6 +1,7 @@
-package sample;
+package reflectionAnalyser;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
@@ -23,11 +24,22 @@ public class Controller {
     /**
      * Gibt den zu suchenden Klassennamen an die Model-Klasse weiter
      */
-    private void searchClass(){
+   public void searchClass(){
         String searchFor = searchField.getText();
 
         HashSet<String> results = model.searchClasses(searchFor);
 
+        for (String s : results){
+            Label tempLabel = new Label(s);
+            tempLabel.setOnMouseClicked(event -> reflectClass(((Label)event.getSource()).getText()));
+            searchResContainer.getChildren().add(tempLabel);
+        }
+
+
+
+    }
+
+    private void reflectClass(String text) {
 
     }
 }
