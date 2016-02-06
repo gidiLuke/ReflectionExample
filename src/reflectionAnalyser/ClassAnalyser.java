@@ -8,10 +8,7 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import sun.reflect.Reflection;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.function.ObjDoubleConsumer;
 
@@ -35,15 +32,6 @@ public class ClassAnalyser {
     }
 
     public TreeSet<String> searchClasses(String searchFor) {
-
-
-
-
-
-
-
-
-
         Set<String> allClasses = reflections.getAllTypes();
         TreeSet<String> allClassNames = new TreeSet<>();
 
@@ -64,16 +52,16 @@ public class ClassAnalyser {
             try {
                 defConstr = c.getConstructor().getName()+"()";
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                System.out.println("No such Method found!");
             }
 
 
-            String[] constructors = new String[c.getConstructors().length];
-            String[] attributes = new String[c.getFields().length];
-            String[] methods = new String[c.getMethods().length];
+            String[] constructors = new String[c.getDeclaredConstructors().length];
+            String[] attributes = new String[c.getDeclaredFields().length];
+            String[] methods = new String[c.getDeclaredMethods().length];
 
             int i = 0;
-            for (Constructor constr : c.getConstructors()) {
+            for (Constructor constr : c.getDeclaredConstructors()) {
                 if(constr.getParameterCount()!=0){
                     constructors[i]=constr.getName()+"(";
                     Parameter[] tempParams = constr.getParameters();
@@ -86,13 +74,13 @@ public class ClassAnalyser {
             }
 
             i = 0;
-            for (Field field : c.getFields()) {
-                attributes[i]=field.getType().toString()+" "+field.getName();
+            for (Field field : c.getDeclaredFields()) {
+                attributes[i]=field.getType().getName()+" "+field.getName();
                 i++;
             }
 
             i = 0;
-            for (Method meth : c.getMethods()) {
+            for (Method meth : c.getDeclaredMethods()) {
 
                 methods[i]=meth.getReturnType().toString()+" "+meth.getName()+"(";
                 Parameter[] tempParams = meth.getParameters();
@@ -103,7 +91,7 @@ public class ClassAnalyser {
                 i++;
             }
 
-            controller.buildReflectionTree(text,defConstr,constructors,attributes,methods);
+            controller.buildReflectionTree(c.getName(), c.getSimpleName(),defConstr,constructors,attributes,methods);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -113,4 +101,28 @@ public class ClassAnalyser {
 
 
     }
+
+
+    public String createInstance(String className) {
+        try {
+            Class c = Class.forName(className);
+            Constructor con = c.getConstructor();
+            Object obj = (Object)con.newInstance();
+            return obj.getClass().getName()+ " Hash: "+obj.getClass().hashCode();
+
+
+        } catch (ClassNotFoundException e) {
+            return "Class not available";
+        } catch (NoSuchMethodException e) {
+            return "No StandardConstructor Available";
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return "Something went wrong";
+    }
+
 }

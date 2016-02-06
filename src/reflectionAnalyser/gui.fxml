@@ -18,6 +18,8 @@
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
    </rowConstraints>
    <children>
       <HBox focusTraversable="false" prefHeight="400.0" prefWidth="600.0" style="-fx-focus-color: transparent;" GridPane.rowIndex="1">
@@ -40,7 +42,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </VBox.margin></Button>
                   <Separator layoutY="90" prefHeight="5.0" prefWidth="173.0" />
-                  <ScrollPane layoutX="7.0" layoutY="95.0" prefHeight="300.0" prefWidth="196.0">
+                  <ScrollPane layoutX="7.0" layoutY="95.0" prefHeight="286.0" prefWidth="190.0">
                      <content>
                         <VBox fx:id="searchResContainer" />
                      </content>
@@ -54,7 +56,7 @@
                <children>
                   <ScrollPane layoutX="2.0" layoutY="-1.0" prefHeight="398.0" prefWidth="415.0" vbarPolicy="NEVER">
                      <content>
-                        <TreeView fx:id="tree" prefHeight="400.0" prefWidth="398.0" />
+                        <TreeView fx:id="tree" prefHeight="401.0" prefWidth="398.0" />
                      </content>
                   </ScrollPane>
                </children>
@@ -66,5 +68,26 @@
             <Font name="Tw Cen MT" size="48.0" />
          </font>
       </Label>
+      <HBox prefHeight="25.0" prefWidth="600.0" GridPane.rowIndex="3">
+         <children>
+            <Button mnemonicParsing="false" onAction="#createStandardInstance" prefHeight="25.0" prefWidth="155.0" text="Create Instance">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+            <ScrollPane prefHeight="36.0" prefWidth="433.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <Label fx:id="instanceOutput" />
+                     </children>
+                  </AnchorPane>
+              </content>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </ScrollPane>
+         </children>
+      </HBox>
    </children>
 </GridPane>
